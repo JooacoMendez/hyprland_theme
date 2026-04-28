@@ -61,7 +61,7 @@ tooltip label {
   padding: 0 25px;
 }
 
-#workspaces button {
+/*#workspaces button {
   padding: 10px;
   color: @foreground;
   background-color: transparent;
@@ -77,6 +77,40 @@ tooltip label {
   background: transparent;
   border: none;
   box-shadow: none;
+}*/
+
+/* Estado por defecto (Ocupado pero no lo estás viendo) */
+#workspaces button {
+    color: #c0caf5;
+    background-color: transparent;
+    border-radius: 10px;
+    margin: 0 4px;
+    transition: all 0.2s ease;
+}
+
+/* El workspace vacío */
+#workspaces button.empty {
+    color: #565f89; /* Un color apagado */
+}
+
+/* EL FOCO: El workspace que estás usando AHORA en ESTE monitor */
+#workspaces button.active {
+    color: #1a1b26;
+    background-color: #7aa2f7; /* Fondo azul destacado */
+    border-radius: 10px;
+}
+
+/* LA OTRA PANTALLA: El workspace que está activo, pero en el OTRO monitor */
+#workspaces button.visible {
+    color: #e0af68; /* Color naranja/dorado para saber que está allá */
+    border-bottom: 2px solid #e0af68;
+}
+
+/* Cuando pasas el mouse por encima */
+#workspaces button:hover {
+    background-color: #3b4261;
+    box-shadow: inherit;
+    text-shadow: inherit;
 }
 
 /* ==== CPU Y RAM ==== */

@@ -12,9 +12,9 @@
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
-        "on-click": "activate",
-        "on-scroll-up": "hyprctl dispatch workspace e-1",
-        "on-scroll-down": "hyprctl dispatch workspace e+1",
+        "sort-by-name": true,
+        "active-only": false,
+        "on-click": "python3 ~/.config/hypr/scripts/smart_workspace.py {name}",
         "format": "{icon}",
         "persistent-workspaces": {
             "1": [],
