@@ -1,0 +1,102 @@
+{
+    // Launcher (Wofi)
+    "custom/launcher": {
+        "format": "",
+        "on-click": "wofi --show drun || pkill wofi",
+        "on-click-right": "kitty --title yazi -e yazi",
+        "tooltip": true,
+        "tooltip-format": "Left Click: Launch Wofi\nRight Click: Launch yazi"
+    },
+
+    // Workspaces (Hyprland)
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e-1",
+        "on-scroll-down": "hyprctl dispatch workspace e+1",
+        "format": "{icon}",
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+        }
+    },
+
+    // CPU
+    "cpu": {
+        "interval": 10,
+        "format": "  {usage}%",
+    },
+
+    // Memoria RAM
+    "memory": {
+        "interval": 2,
+        "format": "  {used}GB",
+        "max-length": 10,
+        "tooltip": true,
+        "tooltip-format": " {used:0.1f}GB/{total:0.1f}GB"
+    },
+
+    // Bandeja del sistema (Systray)
+    "tray": {
+        "icon-size": 14,
+        "spacing": 10
+    },
+
+    // Volumen (Pulseaudio)
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": " ",
+        "tooltip": false,
+        "on-click": "~/.config/hypr/scripts/volumecontrol.sh --toggle",
+        "on-click-right": "pavucontrol",
+        "on-scroll-up": "~/.config/hypr/scripts/volumecontrol.sh --inc",
+        "on-scroll-down": "~/.config/hypr/scripts/volumecontrol.sh --dec",
+        "scroll-step": 5,
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "default": ["", "", " "]
+        }
+    },
+
+    // Reloj y Calendario
+    "clock": {
+	"timezone": "America/Argentina/Buenos_Aires",
+        "format": " {:%H:%M}",
+        "format-alt": " {:%R 󰃭 %d·%m·%Y}",
+        "on-clock-right": "exec gnome-calendar",
+        "tooltip": true,
+        "tooltip-format": "<span>{calendar}</span>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "on-scroll": 1,
+            "on-click-right": "mode",
+            "format": {
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                "today": "<span color='#ff6699'><b>{}</b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_down",
+            "on-scroll-down": "shift_up"
+        }
+    },
+
+    // Botón de Apagar
+    "custom/power_btn": {
+        "format": "",
+        "on-click": "python3 ~/.config/hypr/scripts/powermenu.py",
+        "tooltip": false
+    }
+}

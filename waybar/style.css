@@ -1,0 +1,114 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "MesloLGS Nerd Font", "Font Awesome";
+  font-weight: bold;
+  font-size: 14px;
+  min-height: 0;
+}
+
+/* Definimos los colores principales aquí */
+@define-color background #000000; /* Fondo negro sólido */
+@define-color foreground #cdd6f4; /* Texto claro (Catppuccin) */
+@define-color hover_color #585b70; /* Color al pasar el ratón */
+
+/* ==== LA BARRA PRINCIPAL ==== */
+window#waybar {
+  background: @background;
+  color: @foreground;
+  border-radius: 15px;
+}
+
+/* ==== TOOLTIPS (Los globitos al pasar el ratón) ==== */
+tooltip {
+  background: @background;
+  opacity: 0.8;
+  border-radius: 15px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: @foreground;
+}
+
+tooltip label {
+  font-size: 16px;
+  color: @foreground;
+}
+
+/* ==== CONFIGURACIÓN GENERAL DE TUS MÓDULOS ==== */
+#custom-launch_rofi,
+#workspaces,
+#cpu,
+#memory,
+#tray,
+#pulseaudio,
+#clock,
+#custom-power_btn {
+  background: transparent;
+  color: @foreground;
+  padding: 0px 8px;
+}
+
+/* ==== LAUNCHER (Wofi) ==== */
+#custom-launcher {
+  padding: 0 10px;
+  padding-right: 10px;
+  font-size: 14px;
+  color: @foreground;
+}
+
+/* ==== WORKSPACES ==== */
+#workspaces {
+  padding: 0 25px;
+}
+
+#workspaces button {
+  padding: 10px;
+  color: @foreground;
+  background-color: transparent;
+}
+
+#workspaces button.active {
+  padding: 0 10px;
+  margin: 0;
+  border-bottom: 2px solid @foreground;
+}
+
+#workspaces button:hover {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* ==== CPU Y RAM ==== */
+#memory,
+#cpu {
+  margin-right: 4px;
+  background-color: transparent;
+}
+
+/* ==== SYSTRAY (Iconos de red, etc) ==== */
+#tray {
+  margin-right: 5px;
+  background-color: transparent;
+}
+
+/* ==== VOLUMEN ==== */
+#pulseaudio {
+  background-color: @background;
+  border-radius: 0 0 0 25px;
+  padding-left: 25px;
+}
+
+/* ==== RELOJ ==== */
+#clock {
+  font-size: 12px;
+}
+
+/* ==== BOTÓN DE APAGADO ==== */
+#custom-power_btn {
+  color: red;
+  padding: 0 25px;
+  margin-right: 0;
+  font-size: 15px;
+  font-weight: bolder;
+}

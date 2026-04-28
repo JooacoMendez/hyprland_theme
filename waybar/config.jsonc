@@ -1,0 +1,30 @@
+{
+    "include": [
+        "$HOME/.config/waybar/modules/modules.jsonc",
+    ],
+    "layer": "top",
+    "position": "top",
+    "mod": "panel",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "reload_style_on_change": true,
+    "height": 15,
+    "margin": "0 15",
+
+    "modules-left": [
+        "custom/launcher",
+	"cpu",
+	"memory",
+    ],
+
+    "modules-center": [
+        "hyprland/workspaces",
+    ],
+
+    "modules-right": [
+        "tray",
+        "clock",
+        "custom/power_btn"
+    ],
+}
