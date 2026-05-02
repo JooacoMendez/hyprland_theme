@@ -30,7 +30,7 @@ def guardar_estado(perfil):
         f.write(perfil)
 
 def perfil_monitor():
-    run_system_cmd(f"hyprctl keyword monitor '{INTERNAL},1280x1024@60,0x0,1'")
+    run_system_cmd(f"hyprctl keyword monitor '{INTERNAL},1920x1080@60,0x0,1'")
     run_system_cmd(f"hyprctl keyword monitor '{EXTERNAL},disabled'")
     cambiar_audio(AUDIO_MONITOR)
     guardar_estado("monitor")
@@ -42,15 +42,14 @@ def perfil_tv():
     guardar_estado("tv")
 
 def perfil_duplicar():
-    run_system_cmd(f"hyprctl keyword monitor '{INTERNAL},1280x1024@60,0x0,1'")
+    run_system_cmd(f"hyprctl keyword monitor '{INTERNAL},1920x1080@60,0x0,1'")
     run_system_cmd(f"hyprctl keyword monitor '{EXTERNAL},1920x1080@60,0x0,1,mirror,{INTERNAL}'")
     cambiar_audio(AUDIO_TV)
     guardar_estado("duplicar")
 
 def perfil_extender():
-    run_system_cmd(f"hyprctl keyword monitor '{EXTERNAL},1920x1080@60,0x0,1'")
-    
-    run_system_cmd(f"hyprctl keyword monitor '{INTERNAL},1280x1024@60,0x1080,1'")
+    run_system_cmd(f"hyprctl keyword monitor '{INTERNAL},1280x1024@60,0x0,1'")
+    run_system_cmd(f"hyprctl keyword monitor '{EXTERNAL},1920x1080@60,auto-up,1'")
     
     run_system_cmd(f"hyprctl keyword workspace 1,monitor:{INTERNAL}")
     run_system_cmd(f"hyprctl keyword workspace 2,monitor:{EXTERNAL}")

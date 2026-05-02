@@ -1,0 +1,112 @@
+* {
+    font:   "JetBrainsMono NF Bold 9";
+    background-color:   transparent;
+    text-color:         #E6E6E6;
+    background: #1a1b26;
+    bg-alt: #222330;
+    background-alt: #1a1b26E0;
+    foreground: #c0caf5;
+    selected: #7aa2f7;
+    active: #9ece6a;
+    urgent: #f7768e;
+
+    margin:     0px;
+    padding:    0px;
+    spacing:    0px;
+}
+
+configuration {
+    modi:  "drun";
+    display-drun: " ";
+    drun-display-format: " {name}";
+    disable-history: true;
+    icon-theme:  "Papirus-Dark";
+    application-fallback-icon: 	"Adwaita";
+    show-icons:  true;
+}
+
+window {
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       720px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+    border-radius:  24px;
+
+    background-color:   #212121F2;
+}
+
+mainbox {
+    padding:    16px;
+}
+
+inputbar {
+    background-color:   #2A2A2A;
+    border-color:       #1A73E8F2;
+
+    border:         2px;
+    border-radius:  16px;
+
+    padding:    8px 16px;
+    spacing:    8px;
+    children:   [ prompt, entry ];
+}
+
+prompt {
+    text-color: #969696;
+}
+
+entry {
+    placeholder:        "Search";
+    placeholder-color:  #3D3D3D;
+}
+
+message {
+    margin:             12px 0 0;
+    border-radius:      16px;
+    border-color:       #3D3D3D80;
+    background-color:   #3D3D3D80;
+}
+
+textbox {
+    padding:    8px 24px;
+}
+
+listview {
+    background-color:   transparent;
+
+    margin:     12px 0 0;
+    lines:      10;
+    columns:    1;
+
+    fixed-height: false;
+}
+
+element {
+    padding:        8px 16px;
+    spacing:        8px;
+    border-radius:  16px;
+    children: [element-icon, element-text];
+}
+
+element normal active {
+    text-color: #1A73E8F2;
+}
+
+element alternate active {
+    text-color: #1A73E8F2;
+}
+
+element selected normal, element selected active {
+    background-color:   #1A73E8F2;
+}
+
+element-icon {
+    size:           1em;
+    vertical-align: 0.5;
+}
+
+element-text {
+    text-color: inherit;
+}

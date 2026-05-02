@@ -1,11 +1,10 @@
 {
-    // Launcher (Wofi)
+    // Launcher (Rofi)
     "custom/launcher": {
         "format": "",
-        "on-click": "wofi --show drun || pkill wofi",
-        "on-click-right": "kitty --title yazi -e yazi",
+        "on-click": "~/.config/hypr/scripts/launcher-rofi.sh",
         "tooltip": true,
-        "tooltip-format": "Left Click: Launch Wofi\nRight Click: Launch yazi"
+        "tooltip-format": "Launch Rofi"
     },
 
     // Workspaces (Hyprland)
@@ -16,7 +15,13 @@
         "active-only": false,
         "on-click": "python3 ~/.config/hypr/scripts/smart_workspace.py {name}",
         "format": "{icon}",
-        "persistent-workspaces": {
+        "format-icons": {
+		"active": "⬤",
+		"default": "⬤",
+		"empty": "⬤",
+		"urgent": "⬤"
+	},
+	"persistent-workspaces": {
             "1": [],
             "2": [],
             "3": [],
@@ -37,7 +42,21 @@
         "format": "  {used}GB",
         "max-length": 10,
         "tooltip": true,
-        "tooltip-format": " {used:0.1f}GB/{total:0.1f}GB"
+        "tooltip-format": " {used:0.1f}GB/{total:0.1f}GB"
+    },
+
+    "custom/updates": {
+        "interval": 3600,
+	"exec": "~/.config/waybar/scripts/updates.sh --get-updates",
+        "format": "󰅢  {}",
+        "max-length": 10,
+	"on-click": "ghostty -e ~/.config/waybar/scripts/updates.sh --update-system"
+    },
+
+    "custom/local_ip": {
+        "interval": 60,
+        "exec": "~/.config/waybar/scripts/local_ip.sh",
+        "format": "󰩟 {}"
     },
 
     // Bandeja del sistema (Systray)
@@ -48,13 +67,13 @@
 
     // Volumen (Pulseaudio)
     "pulseaudio": {
-        "format": "{icon} {volume}%",
+        "format": "{icon}  {volume}%",
         "format-muted": " ",
         "tooltip": false,
-        "on-click": "~/.config/hypr/scripts/volumecontrol.sh --toggle",
+        "on-click": "",
         "on-click-right": "pavucontrol",
-        "on-scroll-up": "~/.config/hypr/scripts/volumecontrol.sh --inc",
-        "on-scroll-down": "~/.config/hypr/scripts/volumecontrol.sh --dec",
+        "on-scroll-up": "pamixer -i 5",
+        "on-scroll-down": "pamixer -d 5",
         "scroll-step": 5,
         "format-icons": {
             "headphone": "",
@@ -91,6 +110,14 @@
             "on-scroll-up": "shift_down",
             "on-scroll-down": "shift_up"
         }
+    },
+
+    "idle_inhibitor": {
+	 "format": "{icon}",
+	 "format-icons": {
+		"activated": "",   // Icono de un ojo abierto (ejemplo)
+        	"deactivated": "" // Icono de un ojo tachado o cerrado
+    	}
     },
 
     // Botón de Apagar

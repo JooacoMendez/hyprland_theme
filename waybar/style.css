@@ -42,6 +42,7 @@ tooltip label {
 #tray,
 #pulseaudio,
 #clock,
+#idle_inhibitor,
 #custom-power_btn {
   background: transparent;
   color: @foreground;
@@ -50,9 +51,9 @@ tooltip label {
 
 /* ==== LAUNCHER (Wofi) ==== */
 #custom-launcher {
-  padding: 0 10px;
+  padding: 0 15px;
   padding-right: 10px;
-  font-size: 14px;
+  font-size: 15px;
   color: @foreground;
 }
 
@@ -61,54 +62,30 @@ tooltip label {
   padding: 0 25px;
 }
 
-/*#workspaces button {
-  padding: 10px;
-  color: @foreground;
-  background-color: transparent;
-}
-
-#workspaces button.active {
-  padding: 0 10px;
-  margin: 0;
-  border-bottom: 2px solid @foreground;
-}
-
-#workspaces button:hover {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}*/
-
-/* Estado por defecto (Ocupado pero no lo estás viendo) */
 #workspaces button {
     color: #c0caf5;
     background-color: transparent;
-    border-radius: 10px;
+    border-radius: 0px;
     margin: 0 4px;
     transition: all 0.2s ease;
 }
 
-/* El workspace vacío */
 #workspaces button.empty {
-    color: #565f89; /* Un color apagado */
+    color: #565f89;
 }
 
-/* EL FOCO: El workspace que estás usando AHORA en ESTE monitor */
 #workspaces button.active {
-    color: #1a1b26;
-    background-color: #7aa2f7; /* Fondo azul destacado */
-    border-radius: 10px;
+    color: @foreground;
+    background-color: rgba(85,85,85,0.6);
 }
 
-/* LA OTRA PANTALLA: El workspace que está activo, pero en el OTRO monitor */
 #workspaces button.visible {
-    color: #e0af68; /* Color naranja/dorado para saber que está allá */
-    border-bottom: 2px solid #e0af68;
+    color: @foreground;
+    border-bottom: 2px solid @foreground;
 }
 
-/* Cuando pasas el mouse por encima */
 #workspaces button:hover {
-    background-color: #3b4261;
+    background-color: rgba(85,85,85,0.4);
     box-shadow: inherit;
     text-shadow: inherit;
 }
@@ -130,7 +107,6 @@ tooltip label {
 #pulseaudio {
   background-color: @background;
   border-radius: 0 0 0 25px;
-  padding-left: 25px;
 }
 
 /* ==== RELOJ ==== */
@@ -138,11 +114,19 @@ tooltip label {
   font-size: 12px;
 }
 
+/* ==== IDLE INHIBITOR ==== */
+#idle_inhibitor.activated {
+    color: @foreground;
+}
+
+#idle_inhibitor.deactivated {
+    color: #a6adc8;
+}
+
 /* ==== BOTÓN DE APAGADO ==== */
 #custom-power_btn {
   color: red;
-  padding: 0 25px;
-  margin-right: 0;
+  padding-right: 18px;
   font-size: 15px;
   font-weight: bolder;
 }

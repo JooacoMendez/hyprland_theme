@@ -1,0 +1,16 @@
+configuration {
+    /* Habilita el soporte para mouse */
+    hover-select: true;
+    me-select-entry: "";
+    me-accept-entry: "MousePrimary";
+
+    /* Cierra rofi si haces click fuera de la ventana */
+    terminal: "ghostty"; // Tu terminal configurada
+}
+
+/* En la sección window del tema */
+window {
+    layer: "top";
+    /* Esto ayuda a que el foco se pierda correctamente en Wayland */
+    close-on-click: true;
+}

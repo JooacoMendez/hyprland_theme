@@ -16,6 +16,8 @@
         "custom/launcher",
 	"cpu",
 	"memory",
+	"custom/updates",
+	"custom/local_ip",
     ],
 
     "modules-center": [
@@ -24,6 +26,8 @@
 
     "modules-right": [
         "tray",
+	"pulseaudio",
+	"idle_inhibitor",
         "clock",
         "custom/power_btn"
     ],
