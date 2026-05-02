@@ -8,9 +8,9 @@
 }
 
 /* Definimos los colores principales aquí */
-@define-color background #000000; /* Fondo negro sólido */
-@define-color foreground #cdd6f4; /* Texto claro (Catppuccin) */
-@define-color hover_color #585b70; /* Color al pasar el ratón */
+@define-color background #000000;
+@define-color foreground #cdd6f4;
+@define-color hover_color #585b70;
 
 /* ==== LA BARRA PRINCIPAL ==== */
 window#waybar {
@@ -19,7 +19,7 @@ window#waybar {
   border-radius: 15px;
 }
 
-/* ==== TOOLTIPS (Los globitos al pasar el ratón) ==== */
+/* ==== TOOLTIPS ==== */
 tooltip {
   background: @background;
   opacity: 0.8;
@@ -34,7 +34,7 @@ tooltip label {
   color: @foreground;
 }
 
-/* ==== CONFIGURACIÓN GENERAL DE TUS MÓDULOS ==== */
+/* ==== CONFIGURACIÓN GENERAL DE MÓDULOS ==== */
 #custom-launch_rofi,
 #workspaces,
 #cpu,
@@ -43,17 +43,20 @@ tooltip label {
 #pulseaudio,
 #clock,
 #idle_inhibitor,
-#custom-power_btn {
+#custom-power_btn,
+#custom-updates,
+#custom-ip {
   background: transparent;
   color: @foreground;
-  padding: 0px 8px;
+  padding: 0px 6px;
+  font-size: 14px;
 }
 
-/* ==== LAUNCHER (Wofi) ==== */
+
+/* ==== LAUNCHER ==== */
 #custom-launcher {
-  padding: 0 15px;
-  padding-right: 10px;
-  font-size: 15px;
+  margin: 0 15px;
+  font-size: 16px;
   color: @foreground;
 }
 
@@ -63,70 +66,77 @@ tooltip label {
 }
 
 #workspaces button {
-    color: #c0caf5;
-    background-color: transparent;
-    border-radius: 0px;
-    margin: 0 4px;
-    transition: all 0.2s ease;
+  color: #c0caf5;
+  background-color: transparent;
+  border-radius: 0px;
+  margin: 0 4px;
+  transition: all 0.2s ease;
 }
 
 #workspaces button.empty {
-    color: #565f89;
+  color: #565f89;
 }
 
 #workspaces button.active {
-    color: @foreground;
-    background-color: rgba(85,85,85,0.6);
+  color: @foreground;
+  background-color: rgba(85,85,85,0.6);
 }
 
 #workspaces button.visible {
-    color: @foreground;
-    border-bottom: 2px solid @foreground;
+  color: @foreground;
+  border-bottom: 2px solid @foreground;
 }
 
 #workspaces button:hover {
-    background-color: rgba(85,85,85,0.4);
-    box-shadow: inherit;
-    text-shadow: inherit;
+  background-color: rgba(85,85,85,0.4);
+  box-shadow: inherit;
+  text-shadow: inherit;
 }
 
 /* ==== CPU Y RAM ==== */
 #memory,
 #cpu {
-  margin-right: 4px;
   background-color: transparent;
 }
 
-/* ==== SYSTRAY (Iconos de red, etc) ==== */
+/* ==== SYSTRAY ==== */
 #tray {
-  margin-right: 5px;
   background-color: transparent;
 }
 
 /* ==== VOLUMEN ==== */
 #pulseaudio {
   background-color: @background;
-  border-radius: 0 0 0 25px;
-}
-
-/* ==== RELOJ ==== */
-#clock {
-  font-size: 12px;
 }
 
 /* ==== IDLE INHIBITOR ==== */
+#idle_inhibitor {
+  margin-right: 6px;
+}
+
 #idle_inhibitor.activated {
-    color: @foreground;
+  color: @foreground;
 }
 
 #idle_inhibitor.deactivated {
-    color: #a6adc8;
+  color: #a6adc8;
 }
 
 /* ==== BOTÓN DE APAGADO ==== */
 #custom-power_btn {
   color: red;
-  padding-right: 18px;
-  font-size: 15px;
+  margin-right: 15px;
+  font-size: 16px;
   font-weight: bolder;
+}
+
+/* ==== UPDATES ==== */
+#custom-updates {
+  color: @foreground;
+  margin-right: 6px;
+}
+
+/* ==== IP ==== */
+#custom-ip {
+  color: @foreground;
 }
