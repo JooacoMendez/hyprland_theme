@@ -67,7 +67,7 @@
 
     // Volumen (Pulseaudio)
     "pulseaudio": {
-        "format": "{icon}  {volume}%",
+        "format": "{icon} {volume}%",
         "format-muted": " ",
         "tooltip": false,
         "on-click": "",

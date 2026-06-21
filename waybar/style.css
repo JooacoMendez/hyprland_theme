@@ -14,9 +14,15 @@
 
 /* ==== LA BARRA PRINCIPAL ==== */
 window#waybar {
+  background: transparent;
+  margin: 0;
+}
+
+window#waybar > box {
   background: @background;
-  color: @foreground;
   border-radius: 15px;
+  margin: 0 10px;
+  padding: 0;
 }
 
 /* ==== TOOLTIPS ==== */
@@ -58,6 +64,7 @@ tooltip label {
   margin: 0 15px;
   font-size: 16px;
   color: @foreground;
+  border-radius: 15px;
 }
 
 /* ==== WORKSPACES ==== */
@@ -66,9 +73,9 @@ tooltip label {
 }
 
 #workspaces button {
+  border-bottom: 2px solid transparent;
   color: #c0caf5;
   background-color: transparent;
-  border-radius: 0px;
   margin: 0 4px;
   transition: all 0.2s ease;
 }
@@ -84,7 +91,7 @@ tooltip label {
 
 #workspaces button.visible {
   color: @foreground;
-  border-bottom: 2px solid @foreground;
+  border-bottom-color: @foreground;
 }
 
 #workspaces button:hover {
@@ -128,6 +135,7 @@ tooltip label {
   margin-right: 15px;
   font-size: 16px;
   font-weight: bolder;
+  border-radius: 15px;
 }
 
 /* ==== UPDATES ==== */

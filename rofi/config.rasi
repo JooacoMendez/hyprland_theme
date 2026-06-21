@@ -1,11 +1,9 @@
 configuration {
-    /* Habilita el soporte para mouse */
     hover-select: true;
     me-select-entry: "";
     me-accept-entry: "MousePrimary";
-
-    /* Cierra rofi si haces click fuera de la ventana */
-    terminal: "ghostty"; // Tu terminal configurada
+    kb-cancel: "Escape,MouseSecondary";
+    terminal: "ghostty";
 }
 
 /* En la sección window del tema */
