@@ -7,9 +7,9 @@ import subprocess
 # --- CONFIGURACIÓN ---
 BUTTONS = [
     ("", "systemctl suspend"),
-    ("󰈆", "hyprctl dispatch exit"),
-    ("", "systemctl reboot"),
-    ("󰐥", "systemctl poweroff"),
+    ("󰈆", "hyprshutdown"),
+    ("", "hyprshutdown -t 'Reiniciando...' --post-cmd 'systemctl reboot'"),
+    ("󰐥", "hyprshutdown -t 'Apagando...' --post-cmd 'systemctl poweroff'"),
 ]
 
 CSS = b"""

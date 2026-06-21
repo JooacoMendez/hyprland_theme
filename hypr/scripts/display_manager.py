@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+from time import sleep
+
 import gi
 import subprocess
 import os
@@ -8,22 +10,46 @@ gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk, Gdk
 
 STATE_FILE = os.path.expanduser("~/.config/hypr/.last_display_state")
-INTERNAL = "VGA-1"
+INTERNAL = "DP-1"
 EXTERNAL = "HDMI-A-1"
-AUDIO_MONITOR = "alsa_output.pci-0000_00_1f.3.analog-stereo"
-AUDIO_TV = "alsa_output.pci-0000_01_00.1.hdmi-stereo"
+
+# Identificadores basados en la salida de wpctl status
+AUDIO_MONITOR = "Ryzen HD Audio Controller"
+AUDIO_TV = "Renoir/Cezanne HDMI/DP Audio Controller"
 
 def run_system_cmd(cmd):
     subprocess.Popen(cmd, shell=True)
 
-def cambiar_audio(nuevo_sink):
-    run_system_cmd(f"pactl set-default-sink {nuevo_sink}")
+def cambiar_audio(nombre_sink):
     try:
-        inputs = subprocess.check_output("pactl list short sink-inputs | awk '{print $1}'", shell=True).decode().split()
-        for i in inputs:
-            run_system_cmd(f"pactl move-sink-input {i} {nuevo_sink}")
-    except:
-        pass
+        # Leemos el estado actual de PipeWire
+        output = subprocess.check_output("wpctl status", shell=True).decode()
+        in_sinks = False
+        sink_id = None
+        
+        for line in output.split('\n'):
+            if "Sinks:" in line:
+                in_sinks = True
+                continue
+            # Salimos del bucle si llegamos a otra categoría
+            if in_sinks and ("Sources:" in line or "Filters:" in line):
+                break 
+            
+            # Buscamos la línea que coincide con el nombre de tu dispositivo
+            if in_sinks and nombre_sink in line:
+                # Limpiamos caracteres visuales ('*', '│') y espacios
+                line_clean = line.replace('*', '').replace('│', '').strip()
+                # El ID es el número que está antes del punto
+                sink_id = line_clean.split('.')[0].strip()
+                break
+        
+        if sink_id:
+            # wpctl set-default define la salida principal. 
+            # WirePlumber se encarga de migrar el audio de las apps activas automáticamente.
+            run_system_cmd(f"wpctl set-default {sink_id}")
+            
+    except Exception as e:
+        print(f"Error cambiando audio: {e}")
 
 def guardar_estado(perfil):
     with open(STATE_FILE, "w") as f:
@@ -32,23 +58,26 @@ def guardar_estado(perfil):
 def perfil_monitor():
     run_system_cmd(f"hyprctl keyword monitor '{INTERNAL},1920x1080@60,0x0,1'")
     run_system_cmd(f"hyprctl keyword monitor '{EXTERNAL},disabled'")
+    sleep(0.5)
     cambiar_audio(AUDIO_MONITOR)
     guardar_estado("monitor")
 
 def perfil_tv():
     run_system_cmd(f"hyprctl keyword monitor '{INTERNAL},disabled'")
     run_system_cmd(f"hyprctl keyword monitor '{EXTERNAL},1920x1080@60,0x0,1'")
+    sleep(3)
     cambiar_audio(AUDIO_TV)
     guardar_estado("tv")
 
 def perfil_duplicar():
     run_system_cmd(f"hyprctl keyword monitor '{INTERNAL},1920x1080@60,0x0,1'")
     run_system_cmd(f"hyprctl keyword monitor '{EXTERNAL},1920x1080@60,0x0,1,mirror,{INTERNAL}'")
+    sleep(0.5)
     cambiar_audio(AUDIO_TV)
     guardar_estado("duplicar")
 
 def perfil_extender():
-    run_system_cmd(f"hyprctl keyword monitor '{INTERNAL},1280x1024@60,0x0,1'")
+    run_system_cmd(f"hyprctl keyword monitor '{INTERNAL},1920x1080@60,0x0,1'")
     run_system_cmd(f"hyprctl keyword monitor '{EXTERNAL},1920x1080@60,auto-up,1'")
     
     run_system_cmd(f"hyprctl keyword workspace 1,monitor:{INTERNAL}")
@@ -56,6 +85,7 @@ def perfil_extender():
     run_system_cmd(f"hyprctl dispatch focusmonitor {INTERNAL}")
     run_system_cmd(f"hyprctl dispatch workspace 1")
     
+    sleep(0.5)
     cambiar_audio(AUDIO_MONITOR)
     guardar_estado("extender")
 
@@ -189,6 +219,18 @@ if __name__ == "__main__":
             perfiles.get(estado, perfil_monitor)()
         else:
             perfil_monitor()
+        
+        try:
+            import json
+            output = subprocess.check_output("hyprctl monitors -j", shell=True, text=True)
+            monitors = json.loads(output)
+            active = [m for m in monitors if not m.get("disabled", False)]
+            if active:
+                monitor_name = active[0]["name"]
+                run_system_cmd(f"hyprctl dispatch focusmonitor {monitor_name}")
+                run_system_cmd("hyprctl dispatch workspace 1")
+        except Exception as e:
+            print(f"Error al forzar workspace 1: {e}")
     else:
         app_instance = Gtk.Application(application_id="com.yako.displaymanager")
         app_instance.connect("activate", on_activate)
